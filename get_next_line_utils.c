@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 16:01:31 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/17 18:40:45 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/19 09:41:14 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,12 @@ int		ft_strchr(char *str, char c)
 	int i;
 
 	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			break;
+	while (str[i] != '\0' && str[i] != c)
 		i++;
-	}
-	return (i);
+	if (str[i] == c)
+		return (i);
+	else
+		return (0);
 }
 
 
@@ -84,10 +83,9 @@ char	*ft_strjoin(char *dst, char *src)
 	int		i;
 	int		j;
 	int		size;
-	//printf("This worked");
+
 	i = 0;
 	j = 0;
-
 	if (!dst || !src)
 		return (NULL);
 	size = ft_strlen(dst) + ft_strlen(src);
