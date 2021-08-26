@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 16:01:31 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/25 19:54:26 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/26 12:00:15 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,20 @@ char	*ft_strdup(char *s1)
 }
 
 
-int		ft_strchr(char *str, char c)
+char	*ft_strchr(char *s, char c)
 {
-	int i;
+	char			*newS;
 
-	i = 0;
-	while (str[i] != '\0' && str[i] != c)
-		i++;
-	if (str[i] == c)
-		return (i);
-	else
-		return (0);
+	if(!s)
+		return (NULL);
+	newS = s;
+	while (*newS != '\0')
+	{
+		if (*newS == '\n')
+			break ;
+		newS++;
+	}
+	return (newS);
 }
 
 

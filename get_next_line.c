@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:53 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/25 19:02:56 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/26 12:02:03 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static char	*ft_get_string(int ret, char **str)
 		return (NULL);
 	else if(ret == 0 && *str == NULL)
 		return (NULL);
-	nli = ft_strchr(*str,'\n');
-	if (ft_strchr(*str,'\n'))
+	nli = (int)(ft_strchr(*str,'\n') - *str);
+	if ((int)ft_strchr(*str,'\n'))
 	{
 		line = ft_subchar(0, nli, *str);
 		tmp = ft_strdup(&(*str)[nli + 1]);
