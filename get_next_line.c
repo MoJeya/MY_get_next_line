@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:53 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/26 12:02:03 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/26 15:56:05 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,9 @@ static int	set_line(int fd, char **buff, char **str)
 		else
 		{
 			tmp = ft_strjoin(*str, *buff);
-			free(*str);
 			*str = tmp;
 		}
-		if(*(*str) == '\n')
+		if(ft_strchr(*str,'\n'))
 			break ;
 		ret = read(fd,*buff, BUFFER_SIZE);
 	}

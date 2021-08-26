@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 16:01:31 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/26 12:00:15 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/26 16:39:33 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-char *ft_subchar(int start, int end, char *s)
+char	*ft_subchar(int start, int end, char *s)
 {
 	char	*tmp;
 	int		i;
@@ -48,7 +48,12 @@ char *ft_subchar(int start, int end, char *s)
 	len = end - start;
 	i = 0;
 	tmp = (char *)calloc((end  - start + 1), sizeof(char));
-	while (i < len && start < end)
+	if (end == 0 && start == 0)
+	{
+		tmp[0] = s[0];
+		return tmp;
+	}
+	while (i <= len && start <= end)
 	{
 		tmp[i] = s[start];
 		i++;
@@ -67,7 +72,8 @@ char	*ft_strdup(char *s1)
 	newStr = (char *)calloc((l_str + 1), sizeof(char));
 	if (newStr == NULL)
 		return (newStr);
-	ft_memcpy(newStr,s1,l_str);
+	newStr[l_str] = '\0';
+	ft_memcpy(newStr,s1,l_str + 1);
 	return (newStr);
 }
 
@@ -81,10 +87,12 @@ char	*ft_strchr(char *s, char c)
 	newS = s;
 	while (*newS != '\0')
 	{
-		if (*newS == '\n')
+		if (*newS == c)
 			break ;
 		newS++;
 	}
+	if(*newS == '\0')
+		return (0);
 	return (newS);
 }
 
@@ -98,7 +106,7 @@ char	*ft_strjoin(char *dst, char *src)
 
 	i = 0;
 	j = 0;
-	if (!dst || !src)
+	if ((!dst || !src) || (!dst && !src))
 		return (NULL);
 	size = ft_strlen(dst) + ft_strlen(src);
 	new = (char *)malloc((size + 1) * sizeof(char));
@@ -112,5 +120,6 @@ char	*ft_strjoin(char *dst, char *src)
 	while (src[j] != '\0')
 		new[i++] = src[j++];
 	new[i] = '\0';
+	free(dst);
 	return (new);
 }

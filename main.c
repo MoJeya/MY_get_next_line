@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 17:05:07 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/25 18:08:48 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/26 14:16:33 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main()
 	while ((str = get_next_line(fd)))
 	{
 		printf("%s\n",str);
+		free(str);
 	}
 	system("leaks a.out");
 	return (0);
