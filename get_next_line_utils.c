@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 16:01:31 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/19 09:41:14 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/25 19:54:26 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_strlen(char *str)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (str[len] != '\0')
@@ -22,11 +22,28 @@ int		ft_strlen(char *str)
 	return (len);
 }
 
-char *ft_subchar(int start,int end, char *s)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char *tmp;
-	int i;
-	int len;
+	char		*tmpDST;
+	const char	*tmpSRC;
+
+	tmpDST = (char *)dst;
+	tmpSRC = (const char *)src;
+	if ((dst == 0) && (src == 0))
+		return (0);
+	while (n)
+	{
+		*(tmpDST++) = *(tmpSRC++);
+		--n;
+	}
+	return (dst);
+}
+
+char *ft_subchar(int start, int end, char *s)
+{
+	char	*tmp;
+	int		i;
+	int		len;
 
 	len = end - start;
 	i = 0;
@@ -45,19 +62,12 @@ char	*ft_strdup(char *s1)
 {
 	char			*newStr;
 	unsigned long	l_str;
-	int i;
 
-	i = 0;
 	l_str = ft_strlen(s1);
-	newStr = (char *)malloc(l_str + 1 * sizeof(char));
+	newStr = (char *)calloc((l_str + 1), sizeof(char));
 	if (newStr == NULL)
 		return (newStr);
-	while(l_str)
-	{
-		newStr[i] = s1[i];
-		i++;
-		--l_str;
-	}
+	ft_memcpy(newStr,s1,l_str);
 	return (newStr);
 }
 
@@ -74,7 +84,6 @@ int		ft_strchr(char *str, char c)
 	else
 		return (0);
 }
-
 
 
 char	*ft_strjoin(char *dst, char *src)
@@ -99,6 +108,6 @@ char	*ft_strjoin(char *dst, char *src)
 	}
 	while (src[j] != '\0')
 		new[i++] = src[j++];
-	new [i] = '\0';
+	new[i] = '\0';
 	return (new);
 }

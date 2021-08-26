@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:53 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/19 09:41:39 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/25 19:02:56 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,33 @@ static char	*ft_get_string(int ret, char **str)
 	if (ft_strchr(*str,'\n'))
 	{
 		line = ft_subchar(0, nli, *str);
-		tmp = ft_strdup(*str);
+		tmp = ft_strdup(&(*str)[nli + 1]);
 		free(*str);
-		*str = ft_strdup(&tmp[nli + 1]);
+		*str = tmp;
+		if(*str[0] == '\0')
+		{
+			free(*str);
+			*str = NULL;
+		}
+	}
+	else
+	{
+		line = ft_strdup(*str);
+		free(*str);
+		*str = NULL;
 	}
 	return (line);
 }
 
 static int	set_line(int fd, char **buff, char **str)
 {
-	int	ret;
+	int		ret;
 	char	*tmp;
 
 	ret = read(fd,*buff,BUFFER_SIZE);
-	while (ret)
+	while (ret > 0)
 	{
+		(*buff)[ret] = '\0';
 		if (*str == NULL)
 			*str = ft_strdup(*buff);
 		else
@@ -50,9 +62,10 @@ static int	set_line(int fd, char **buff, char **str)
 			*str = tmp;
 		}
 		if(*(*str) == '\n')
-			break;
+			break ;
 		ret = read(fd,*buff, BUFFER_SIZE);
 	}
+	free(*buff);
 	return (ret);
 }
 
