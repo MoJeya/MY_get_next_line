@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 16:01:31 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/26 16:39:33 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/26 18:02:01 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_subchar(int start, int end, char *s)
 
 	len = end - start;
 	i = 0;
-	tmp = (char *)calloc((end  - start + 1), sizeof(char));
+	tmp = (char *)ft_calloc((len + 1), sizeof(char));
 	if (end == 0 && start == 0)
 	{
 		tmp[0] = s[0];

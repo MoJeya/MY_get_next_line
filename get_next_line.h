@@ -16,6 +16,8 @@
 
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);
+void	*ft_calloc(int count, int size);
+void	ft_bzero(void *s, int n);
 char 	*ft_subchar(int start,int end, char *s);
 char	*ft_strjoin(char *dst, char *src);
 char	*ft_strchr(char *str, char c);

@@ -6,11 +6,38 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:53 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/26 15:56:05 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/26 17:51:29 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	ft_bzero(void *s, int n)
+{
+	int				cnt;
+	char			*tmp;
+
+	tmp = (char *)s;
+	cnt = 0;
+	while (cnt < n)
+	{
+		tmp[cnt] = '\0';
+		cnt++;
+	}
+}
+
+void	*ft_calloc(int count, int size)
+{
+	char	*p;
+	int		full;
+
+	full = count * size;
+	p = malloc(full);
+	if (p == NULL)
+		return (p);
+	ft_bzero(p, count * size);
+	return (p);
+}
 
 static char	*ft_get_string(int ret, char **str)
 {
