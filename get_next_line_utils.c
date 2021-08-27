@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 16:01:31 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/26 18:02:01 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/27 19:18:51 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,41 +22,21 @@ int		ft_strlen(char *str)
 	return (len);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	char		*tmpDST;
-	const char	*tmpSRC;
-
-	tmpDST = (char *)dst;
-	tmpSRC = (const char *)src;
-	if ((dst == 0) && (src == 0))
-		return (0);
-	while (n)
-	{
-		*(tmpDST++) = *(tmpSRC++);
-		--n;
-	}
-	return (dst);
-}
-
-char	*ft_subchar(int start, int end, char *s)
+char	*ft_subchar(int start, int len, char *s)
 {
 	char	*tmp;
-	int		i;
-	int		len;
 
-	len = end - start;
-	i = 0;
-	tmp = (char *)ft_calloc((len + 1), sizeof(char));
-	if (end == 0 && start == 0)
+	tmp = (char *)ft_calloc((len), sizeof(char) + 1);
+	if(!tmp)
+		return (NULL);
+	if (len == 0 && start == 0)
 	{
 		tmp[0] = s[0];
-		return tmp;
+		return (tmp);
 	}
-	while (i <= len && start <= end)
+	while (start < len)
 	{
-		tmp[i] = s[start];
-		i++;
+		tmp[start] = s[start];
 		start++;
 	}
 	return (tmp);
@@ -65,15 +45,21 @@ char	*ft_subchar(int start, int end, char *s)
 
 char	*ft_strdup(char *s1)
 {
-	char			*newStr;
-	unsigned long	l_str;
+	char				*newStr;
+	const char			*cpy_s1;
+	unsigned long		l_str;
 
 	l_str = ft_strlen(s1);
-	newStr = (char *)calloc((l_str + 1), sizeof(char));
+	newStr = (char *)ft_calloc((l_str + 1), sizeof(char));
 	if (newStr == NULL)
 		return (newStr);
+	cpy_s1 = (const char*)s1;
 	newStr[l_str] = '\0';
-	ft_memcpy(newStr,s1,l_str + 1);
+	while (l_str)
+	{
+		newStr[l_str - 1] = cpy_s1[l_str - 1];
+		--l_str;
+	}
 	return (newStr);
 }
 

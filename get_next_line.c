@@ -6,36 +6,24 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:53 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/26 17:51:29 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/27 18:08:19 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_bzero(void *s, int n)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int				cnt;
-	char			*tmp;
+	char		*p;
+	size_t		i;
 
-	tmp = (char *)s;
-	cnt = 0;
-	while (cnt < n)
+	i = 0;
+	p = malloc(count * size);
+	while (p && i < (count * size))
 	{
-		tmp[cnt] = '\0';
-		cnt++;
+		p[i] = 0;
+		i++;
 	}
-}
-
-void	*ft_calloc(int count, int size)
-{
-	char	*p;
-	int		full;
-
-	full = count * size;
-	p = malloc(full);
-	if (p == NULL)
-		return (p);
-	ft_bzero(p, count * size);
 	return (p);
 }
 
@@ -52,7 +40,7 @@ static char	*ft_get_string(int ret, char **str)
 	nli = (int)(ft_strchr(*str,'\n') - *str);
 	if ((int)ft_strchr(*str,'\n'))
 	{
-		line = ft_subchar(0, nli, *str);
+		line = ft_subchar(0, nli + 1, *str);
 		tmp = ft_strdup(&(*str)[nli + 1]);
 		free(*str);
 		*str = tmp;
@@ -74,7 +62,6 @@ static char	*ft_get_string(int ret, char **str)
 static int	set_line(int fd, char **buff, char **str)
 {
 	int		ret;
-	char	*tmp;
 
 	ret = read(fd,*buff,BUFFER_SIZE);
 	while (ret > 0)
@@ -83,10 +70,7 @@ static int	set_line(int fd, char **buff, char **str)
 		if (*str == NULL)
 			*str = ft_strdup(*buff);
 		else
-		{
-			tmp = ft_strjoin(*str, *buff);
-			*str = tmp;
-		}
+			*str = ft_strjoin(*str, *buff);
 		if(ft_strchr(*str,'\n'))
 			break ;
 		ret = read(fd,*buff, BUFFER_SIZE);
@@ -103,7 +87,7 @@ char *get_next_line(int fd)
 
 	if (fd < 0)
 		return (NULL);
-	buff = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	buff = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!buff || fd < 0)
 		return (NULL);
 	ret = set_line(fd, &buff, &str);
