@@ -6,11 +6,17 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:53 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/27 18:08:19 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/28 13:37:11 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	ft_del_string(char **s)
+{
+	free(*s);
+	*s = NULL;
+}
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -35,26 +41,22 @@ static char	*ft_get_string(int ret, char **str)
 
 	if (ret < 0)
 		return (NULL);
-	else if(ret == 0 && *str == NULL)
+	else if (ret == 0 && *str == NULL)
 		return (NULL);
-	nli = (int)(ft_strchr(*str,'\n') - *str);
-	if ((int)ft_strchr(*str,'\n'))
+	nli = (int)(ft_strchr(*str, '\n') - *str);
+	if ((int)ft_strchr(*str, '\n'))
 	{
 		line = ft_subchar(0, nli + 1, *str);
 		tmp = ft_strdup(&(*str)[nli + 1]);
 		free(*str);
 		*str = tmp;
-		if(*str[0] == '\0')
-		{
-			free(*str);
-			*str = NULL;
-		}
+		if (*str[0] == '\0')
+			ft_del_string(str);
 	}
 	else
 	{
 		line = ft_strdup(*str);
-		free(*str);
-		*str = NULL;
+		ft_del_string(str);
 	}
 	return (line);
 }
@@ -63,7 +65,7 @@ static int	set_line(int fd, char **buff, char **str)
 {
 	int		ret;
 
-	ret = read(fd,*buff,BUFFER_SIZE);
+	ret = read(fd, *buff, BUFFER_SIZE);
 	while (ret > 0)
 	{
 		(*buff)[ret] = '\0';
@@ -71,7 +73,7 @@ static int	set_line(int fd, char **buff, char **str)
 			*str = ft_strdup(*buff);
 		else
 			*str = ft_strjoin(*str, *buff);
-		if(ft_strchr(*str,'\n'))
+		if (ft_strchr(*str, '\n'))
 			break ;
 		ret = read(fd,*buff, BUFFER_SIZE);
 	}
@@ -79,7 +81,7 @@ static int	set_line(int fd, char **buff, char **str)
 	return (ret);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static char		*str;
 	char			*buff;
@@ -91,6 +93,5 @@ char *get_next_line(int fd)
 	if (!buff || fd < 0)
 		return (NULL);
 	ret = set_line(fd, &buff, &str);
-	return (ft_get_string(ret,&str));
+	return (ft_get_string(ret, &str));
 }
-

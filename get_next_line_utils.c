@@ -6,13 +6,13 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 16:01:31 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/08/27 19:18:51 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/08/28 13:37:13 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	len;
 
@@ -27,7 +27,7 @@ char	*ft_subchar(int start, int len, char *s)
 	char	*tmp;
 
 	tmp = (char *)ft_calloc((len), sizeof(char) + 1);
-	if(!tmp)
+	if (!tmp)
 		return (NULL);
 	if (len == 0 && start == 0)
 	{
@@ -40,7 +40,6 @@ char	*ft_subchar(int start, int len, char *s)
 		start++;
 	}
 	return (tmp);
-
 }
 
 char	*ft_strdup(char *s1)
@@ -53,7 +52,7 @@ char	*ft_strdup(char *s1)
 	newStr = (char *)ft_calloc((l_str + 1), sizeof(char));
 	if (newStr == NULL)
 		return (newStr);
-	cpy_s1 = (const char*)s1;
+	cpy_s1 = (const char *)s1;
 	newStr[l_str] = '\0';
 	while (l_str)
 	{
@@ -63,12 +62,11 @@ char	*ft_strdup(char *s1)
 	return (newStr);
 }
 
-
 char	*ft_strchr(char *s, char c)
 {
 	char			*newS;
 
-	if(!s)
+	if (!s)
 		return (NULL);
 	newS = s;
 	while (*newS != '\0')
@@ -77,11 +75,10 @@ char	*ft_strchr(char *s, char c)
 			break ;
 		newS++;
 	}
-	if(*newS == '\0')
+	if (*newS == '\0')
 		return (0);
 	return (newS);
 }
-
 
 char	*ft_strjoin(char *dst, char *src)
 {

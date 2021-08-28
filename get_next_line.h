@@ -1,24 +1,25 @@
-# ifndef GET_NEXT_LINE_H
-#	define GET_NEXT_LINE_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/28 13:36:49 by mjeyavat          #+#    #+#             */
+/*   Updated: 2021/08/28 13:37:09 by mjeyavat         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/**
- * #ifndef BUFFER_SIZE
-	# define BUFFER_SIZE 1
-#endif*/
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-//#include <stdio.h> //take this out
-#include <stdlib.h>
-//#include <sys/types.h> //take this out
-//#include <sys/stat.h> //take this out
-//#include <fcntl.h> //take this out
-#include <unistd.h>
-//#include <string.h> //take this out
-
+# include <stdlib.h>
+# include <unistd.h>
 
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);
 void	*ft_calloc(size_t count, size_t size);
-char 	*ft_subchar(int start,int end, char *s);
+char	*ft_subchar(int start, int end, char *s);
 char	*ft_strjoin(char *dst, char *src);
 char	*ft_strchr(char *str, char c);
 char	*ft_strdup(char *s1);
