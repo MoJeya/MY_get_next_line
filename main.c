@@ -1,15 +1,15 @@
 #include "get_next_line.h"
 
-int main()
+int main(void)
 {
-	int fd;
+	int		fd;
 	char	*str;
+
 	fd = open("test.txt",O_RDONLY);
-	if(fd == -1)
+	if (fd == -1)
 	{
 		write(3,"ERROR",5);
 	}
-
 	while ((str = get_next_line(fd)))
 	{
 		printf("%s\n",str);

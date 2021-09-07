@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:53 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/09/07 19:43:13 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/09/07 19:13:08 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	ft_del_string(char **s)
 {
@@ -83,7 +83,7 @@ static int	set_line(int fd, char **buff, char **str)
 
 char	*get_next_line(int fd)
 {
-	static char		*str;
+	static char		*str[10240];
 	char			*buff;
 	int				ret;
 
@@ -92,6 +92,6 @@ char	*get_next_line(int fd)
 	buff = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!buff || fd < 0)
 		return (NULL);
-	ret = set_line(fd, &buff, &str);
-	return (ft_get_string(ret, &str));
+	ret = set_line(fd, &buff, &str[fd]);
+	return (ft_get_string(ret, &str[fd]));
 }
