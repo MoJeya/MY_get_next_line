@@ -6,7 +6,7 @@
 /*   By: mjeyavat <mjeyavat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 15:03:53 by mjeyavat          #+#    #+#             */
-/*   Updated: 2021/09/07 19:43:13 by mjeyavat         ###   ########.fr       */
+/*   Updated: 2021/09/14 12:56:16 by mjeyavat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*get_next_line(int fd)
 	if (fd < 0)
 		return (NULL);
 	buff = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
-	if (!buff || fd < 0)
+	if (!buff)
 		return (NULL);
 	ret = set_line(fd, &buff, &str);
 	return (ft_get_string(ret, &str));
